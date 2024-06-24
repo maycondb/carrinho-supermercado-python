@@ -1,68 +1,33 @@
 def conta():
-
-
-    arq = open('conta.txt', 'a')
-    print("Vamos criar uma conta!!!!!!")
-    email = input ("Digite seu email:")
-    senha = input("digite sua senha:")
-    arq.write('{},{}\n'.format(email,senha))
-    arq.close
+    with open('conta.txt', 'a') as arq:
+        print("Vamos criar uma conta!!!!!!")
+        email = input("Digite seu email: ")
+        senha = input("Digite sua senha: ")
+        arq.write('{},{}\n'.format(email, senha))
 
 
 def login():
-       
-    resposta = input("voce é um novo usuario? (sim/nao): ")
-    if  resposta.lower () == "sim":
-     print ("vamos nos cadastrar...")
-     conta()
-
+    resposta = input("Você é um novo usuário? (sim/não): ").strip().lower()
+    if resposta == "sim":
+        print("Vamos nos cadastrar...")
+        conta()
     else:
-     email1 = input('informe seu email:')
-     senha1 = input('informe sua senha:')
+        email1 = input('Informe seu email: ')
+        senha1 = input('Informe sua senha: ')
 
-     with open('conta.txt', 'r') as arq:
-            encontrado = False
+        encontrado = False
+        with open('conta.txt', 'r') as arq:
             for linha in arq:
                 email, senha = linha.strip().split(',')
                 if email == email1 and senha == senha1:
                     encontrado = True
                     break
 
-    if encontrado:
+        if encontrado:
             print("Login feito com sucesso!")
-    else:
+        else:
             print("Email ou senha incorretos. Tente novamente.")
-            
-def conta():
-
-    arq = open('conta.txt', 'a')
-    print("Vamos criar uma conta!!!!!!")
-    email = input ("Digite seu email:")
-    senha = input("digite sua senha:")
-    arq.write('{},{}\n'.format(email,senha))
-    arq.close
 
 
-def login():
-       
-    resposta = input("voce é um novo usuario? (sim/nao): ")
-    if  resposta.lower () == "sim":
-     print ("vamos nos cadastrar...")
-     conta()
-
-    else:
-     email1 = input('informe seu email:')
-     senha1 = input('informe sua senha:')
-
-     with open('conta.txt', 'r') as arq:
-            encontrado = False
-            for linha in arq:
-                email, senha = linha.strip().split(',')
-                if email == email1 and senha == senha1:
-                    encontrado = True
-                    break
-
-    if encontrado:
-            print("Login feito com sucesso!")
-    else:
-            print("Email ou senha incorretos. Tente novamente.")
+# Chamando a função login para iniciar o programa
+login()
